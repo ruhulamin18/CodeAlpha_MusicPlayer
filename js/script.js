@@ -110,8 +110,71 @@ const localSongs = [
         src: "/assets/music/_Tum Hi Ho_ Aashiqui 2 Full Song With Lyrics _ Aditya Roy Kapur, Shraddha Kapoor [Umqb9KENgmk].mp3",
         cover: "https://images.unsplash.com/photo-1517230878791-228b730c7790?auto=format&fit=crop&w=300&q=80",
         category: "Bollywood"
+    },
+    {
+        id: 'L12', title: "Safe And Sound (Lyrics)", artist: "Capital Cities",
+        src: "/assets/music/Capital Cities - Safe And Sound (Lyrics) [jR-OsKMD80c].mp3",
+        cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=300&q=80",
+        category: "Pop"
+    },
+    {
+        id: 'L13', title: "Lemon Tree (Lyrics)", artist: "Fools Garden",
+        src: "/assets/music/Lemon Tree - Fools Garden (Lyrics) [fCPoKsTJfDs].mp3",
+        cover: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80",
+        category: "Pop"
+    },
+    {
+        id: 'L14', title: "Hey, Soul Sister (Lyrics)", artist: "Train",
+        src: "/assets/music/Train - Hey, Soul Sister (Lyrics) [-lEPX2fF4Ls].mp3",
+        cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80",
+        category: "Pop"
+    },
+    {
+        id: 'L15', title: "Pal", artist: "Arijit Singh, Shreya Ghoshal",
+        src: "/assets/music/Pal - Lyrical Video   Jalebi   Arijit Singh   Shreya Ghoshal   Rhea & Varun   Javed - Mohsin.mp3",
+        cover: "https://images.unsplash.com/photo-1595972049618-4b711e5cf1b4?auto=format&fit=crop&w=300&q=80",
+        category: "Bollywood"
+    },
+    {
+        id: 'L16', title: "Pal Pal Dil Ke Paas", artist: "Arijit Singh",
+        src: "/assets/music/Pal Pal Dil Ke Paas - Title _ Arijit Singh _ Karan Deol, Sahher _ Parampara, Sachet, Rishi Rich [lgTHGZF3BQw].mp3",
+        cover: "https://images.unsplash.com/photo-1517230878791-228b730c7790?auto=format&fit=crop&w=300&q=80",
+        category: "Bollywood"
+    },
+    {
+        id: 'L17', title: "Kaun Tujhe", artist: "Amaal Mallik, Palak",
+        src: "/assets/music/KAUN TUJHE  Lyrical   M.S. DHONI -THE UNTOLD STORY   Amaal Mallik Palak   Sushant Singh Disha Patani.mp3",
+        cover: "https://images.unsplash.com/photo-1596726207135-2634354c0cfb?auto=format&fit=crop&w=300&q=80",
+        category: "Bollywood"
+    },
+    {
+        id: 'L18', title: "La La La", artist: "Energetic Dance Pop",
+        src: "/assets/music/La La La – Energetic Dance Pop Hit 2025 _ Viral Slap House Vibes.mp3",
+        cover: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=300&q=80",
+        category: "Pop"
+    },
+    {
+        id: 'L19', title: "Long Distance Love", artist: "Ankan, Afrin",
+        src: "/assets/music/Long Distance Love _ Coke Studio Bangla _ Season 3 _ Ankan X Afrin _ Shuvendu [sqJ2QhjBQaw].mp3",
+        cover: "https://images.unsplash.com/photo-1533050487297-09b450131914?auto=format&fit=crop&w=300&q=80",
+        category: "Bengali"
     }
 ];
+
+const DEFAULT_COVER = `data:image/svg+xml,${encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <rect width="300" height="300" fill="#26332f"/>
+        <circle cx="150" cy="150" r="92" fill="#101515" stroke="#79e316" stroke-width="7"/>
+        <circle cx="150" cy="150" r="25" fill="#79e316"/>
+        <circle cx="150" cy="150" r="9" fill="#101515"/>
+        <path d="M150 58v55" stroke="#79e316" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+`)}`;
+
+function handleCoverError(image) {
+    image.onerror = null;
+    image.src = DEFAULT_COVER;
+}
 
 // =========================================================================
 // 4. ICONS
@@ -480,7 +543,8 @@ function switchToLocalPlayerUI(song) {
     ytPlayerWrapper.classList.add('hidden');
     playerArtWrapper.classList.remove('hidden');
     
-    playerArt.src = song.cover;
+    playerArt.onerror = () => handleCoverError(playerArt);
+    playerArt.src = song.cover || DEFAULT_COVER;
     playerTitle.textContent = song.title;
     playerArtist.textContent = song.artist;
     
@@ -720,7 +784,7 @@ function renderList(list, type) {
 
         row.innerHTML = `
             <div class="track-img">
-                <img src="${song.cover}" alt="cover">
+                <img src="${song.cover || DEFAULT_COVER}" alt="${song.title} artwork" onerror="handleCoverError(this)">
             </div>
             <div class="track-info">
                 <span class="track-title">${song.title}</span>
