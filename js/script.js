@@ -176,6 +176,13 @@ function handleCoverError(image) {
     image.src = DEFAULT_COVER;
 }
 
+function getAudioUrl(source) {
+    const musicPath = '/assets/music/';
+    if (!source.startsWith(musicPath)) return source;
+
+    return `${musicPath}${encodeURIComponent(source.slice(musicPath.length))}`;
+}
+
 // =========================================================================
 // 4. ICONS
 // =========================================================================
@@ -504,7 +511,7 @@ function loadLocalSong(index) {
     if (isYtApiReady && ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
 
     // Setup Local Audio
-    audioHTML5.src = song.src;
+    audioHTML5.src = getAudioUrl(song.src);
     audioHTML5.currentTime = 0;
     
     // UI Switch
@@ -591,6 +598,11 @@ audioHTML5.addEventListener('timeupdate', () => {
     }
 });
 audioHTML5.addEventListener('ended', () => playNext(true));
+audioHTML5.addEventListener('error', () => {
+    if (currentPlaybackMode === MODE_LOCAL && localSongs[currentLocalIndex]) {
+        showError(`Unable to load "${localSongs[currentLocalIndex].title}". Check the deployed MP3 file.`, true);
+    }
+});
 
 // Online Tracking
 function startYtProgressTracker() {
