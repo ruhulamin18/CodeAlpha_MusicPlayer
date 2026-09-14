@@ -177,10 +177,11 @@ function handleCoverError(image) {
 }
 
 function getAudioUrl(source) {
-    const musicPath = '/assets/music/';
-    if (!source.startsWith(musicPath)) return source;
+    const sourcePath = '/assets/music/';
+    const musicPath = '/music/';
+    if (!source.startsWith(sourcePath)) return source;
 
-    return `${musicPath}${encodeURIComponent(source.slice(musicPath.length))}`;
+    return `${musicPath}${encodeURIComponent(source.slice(sourcePath.length))}`;
 }
 
 // =========================================================================
