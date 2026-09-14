@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Music Player</title>
+    <meta name="description" content="A professional, modern, fully functional Music Player Web Application with Local and Online support.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="beatz-app">
+            
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <h1>AURA MUSIC</h1>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li class="nav-header">Local Music</li>
+                        <li><a href="#" class="sidebar-nav-btn active" data-view="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Explore Local</a></li>
+                        <li><a href="#" class="sidebar-nav-btn" data-view="local_favourites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Local Favourites</a></li>
+                        
+                        <li class="nav-header mt-4">Online Music</li>
+                        <li><a href="#" class="sidebar-nav-btn" data-view="online_search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search YouTube</a></li>
+                        <li><a href="#" class="sidebar-nav-btn" data-view="online_favourites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Online Favourites</a></li>
+                    </ul>
+                </nav>
+
+                <div class="playlists-nav">
+                    <div class="playlists-header">
+                        <h3>Playlists</h3>
+                        <button class="add-btn" aria-label="Add Playlist">+</button>
+                    </div>
+                    <ul>
+                        <li><a href="#" class="playlist-nav-btn" data-category="Pop"><img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=64&q=80" alt="" class="playlist-thumb"> Pop Favorites</a></li>
+                        <li><a href="#" class="playlist-nav-btn" data-category="Bollywood"><img src="https://images.unsplash.com/photo-1595972049618-4b711e5cf1b4?auto=format&fit=crop&w=64&q=80" alt="" class="playlist-thumb"> Bollywood</a></li>
+                        <li><a href="#" class="playlist-nav-btn" data-category="Bengali"><img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=64&q=80" alt="" class="playlist-thumb"> Bengali Hits</a></li>
+                        <li><a href="#" class="playlist-nav-btn" data-category="Global"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=64&q=80" alt="" class="playlist-thumb"> Global Vibes</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                
+                <!-- Top Nav Bar -->
+                <header class="top-bar">
+                    <div class="top-tabs">
+                        <a href="#" class="top-tab-btn active">Music</a>
+                        <a href="#" class="top-tab-btn">Podcast</a>
+                        <a href="#" class="top-tab-btn">Live</a>
+                        <a href="#" class="top-tab-btn">Radio</a>
+                    </div>
+                    
+                    <div class="search-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="search-input" placeholder="Search local or online (Press Enter)">
+                        <button id="search-btn" class="search-submit-btn">Search</button>
+                    </div>
+
+                </header>
+
+                <div class="breadcrumbs">
+                    <span>Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg> <span class="active-crumb" id="breadcrumb-current">Explore Local</span></span>
+                </div>
+
+                <!-- Showcase / Header -->
+                <section class="playlist-showcase" id="main-showcase">
+                    <div class="playlist-hero-img vinyl-art" id="view-image-container">
+                        <img id="view-image" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" alt="View Cover">
+                    </div>
+                    <div class="playlist-hero-info">
+                        <h2 id="view-title">EXPLORE LOCAL</h2>
+                        <p class="playlist-stats">
+                            <span id="total-songs">0 Songs</span>
+                            <span id="api-key-warning" class="api-warning hidden">API Key Required!</span>
+                        </p>
+                    </div>
+                    <button class="play-all-btn" id="main-play-btn" aria-label="Play Playlist">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </button>
+                </section>
+
+                <!-- Loading Indicator -->
+                <div id="loading-indicator" class="loading-container hidden">
+                    <div class="spinner"></div>
+                    <p>Searching YouTube...</p>
+                </div>
+
+                <!-- Song List -->
+                <section class="song-list-container">
+                    <div id="playlist-container" class="song-list">
+                        <!-- JS injected rows (Local or Online) -->
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Right Player Panel -->
+            <aside class="player-panel">
+                <div class="player-header">
+                    <h2 id="player-mode-label">Local Player</h2>
+                    <button class="more-options-btn">...</button>
+                </div>
+
+                <!-- Local Art -->
+                <div class="player-art-container vinyl-art" id="player-art-wrapper">
+                    <img id="player-art" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Now Playing" class="paused">
+                </div>
+
+                <!-- YouTube IFrame Container (Hidden by default) -->
+                <div class="yt-player-container hidden" id="yt-player-wrapper">
+                    <div id="ytplayer"></div>
+                </div>
+
+                <div class="player-info">
+                    <h3 id="player-title">Loading...</h3>
+                    <p id="player-artist">Please wait</p>
+                </div>
+
+                <div class="player-progress">
+                    <input type="range" id="progress-bar" value="0" min="0" max="100" aria-label="Seek">
+                    <div class="time-row">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Volume Control -->
+                <div class="volume-control">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                    <input type="range" id="volume-bar" value="80" min="0" max="100" aria-label="Volume">
+                </div>
+
+                <div class="player-controls">
+                    <button class="control-btn small" id="shuffle-btn" aria-label="Shuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg></button>
+                    <button class="control-btn" id="prev-btn" aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line></svg></button>
+                    <button class="play-btn-large" id="play-btn" aria-label="Play/Pause">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </button>
+                    <button class="control-btn" id="next-btn" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line></svg></button>
+                    <button class="control-btn small" id="repeat-btn" aria-label="Repeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></button>
+                </div>
+
+            </aside>
+
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- YouTube IFrame API (Loaded dynamically in JS, but placed here as fallback structure note) -->
+    <script src="/js/script.js"></script>
+</body>
+</html>

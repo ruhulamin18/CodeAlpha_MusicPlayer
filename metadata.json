@@ -1,0 +1,6 @@
+{
+  "name": "Aura Music Player",
+  "description": "A professional, modern, fully functional Music Player Web Application using vanilla HTML5, CSS3, and JavaScript.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
